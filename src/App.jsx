@@ -1,4 +1,4 @@
-import {} from 'react';
+import { useState } from 'react';
 import Button from '@mui/material/Button';
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 import ThreeDRotation from '@mui/icons-material/ThreeDRotation';
@@ -10,10 +10,22 @@ import {
   experimental_extendTheme as extendTheme,
   useColorScheme,
 } from '@mui/material/styles';
-
+import useMediaQuery from '@mui/material/useMediaQuery';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import SettingsBrightnessIcon from '@mui/icons-material/SettingsBrightness';
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+import Box from '@mui/material/Box';
 function ModeToggle() {
   //  lưu localStorage vào trình duyệt (dark/light)
   const { mode, setMode } = useColorScheme();
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const prefersLightMode = useMediaQuery('(prefers-color-scheme: light)');
+  console.log(' prefersDarkMode: ', prefersDarkMode);
+  console.log('prefersLightMode:', prefersLightMode);
   return (
     <Button
       onClick={() => {
@@ -22,6 +34,48 @@ function ModeToggle() {
     >
       {mode === 'light' ? 'Turn dark' : 'Turn light'}
     </Button>
+  );
+}
+export function ModeSelect() {
+  const { mode, setMode } = useColorScheme();
+
+  const handleChange = (event) => {
+    const selectMode = event.target.value;
+    console.log(selectMode);
+    setMode(selectMode);
+  };
+
+  return (
+    <FormControl sx={{ m: 1, minWidth: 120 }} size='small'>
+      <InputLabel id='label-select-dark-light-mode'>Mode</InputLabel>
+      <Select
+        labelId='label-select-dark-light-mode'
+        id='select-dark-light-mode'
+        value={mode}
+        label='Mode'
+        onChange={handleChange}
+      >
+        <MenuItem value='light'>
+          <div
+            className=''
+            style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+          >
+            <LightModeIcon fontSize='small'></LightModeIcon> Light
+          </div>
+        </MenuItem>
+        <MenuItem value='dark'>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <DarkModeOutlinedIcon fontSize='small'></DarkModeOutlinedIcon> Dark
+          </Box>
+        </MenuItem>
+        <MenuItem value='system'>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <SettingsBrightnessIcon fontSize='small'></SettingsBrightnessIcon>{' '}
+            System
+          </Box>
+        </MenuItem>
+      </Select>
+    </FormControl>
   );
 }
 function HomeIcon(props) {
@@ -35,6 +89,8 @@ function App() {
   return (
     <>
       <ModeToggle></ModeToggle>
+      <br />
+      <ModeSelect></ModeSelect>
       <hr />
       <div>hello</div>
       <Typography variant='body2' color='text.secondary'>
