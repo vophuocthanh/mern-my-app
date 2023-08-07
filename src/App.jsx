@@ -58,18 +58,18 @@ export function ModeSelect() {
         <MenuItem value='light'>
           <div
             className=''
-            style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+            style={{ display: 'flex', alignItems: 'center', gap: 1 }}
           >
             <LightModeIcon fontSize='small'></LightModeIcon> Light
           </div>
         </MenuItem>
         <MenuItem value='dark'>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <DarkModeOutlinedIcon fontSize='small'></DarkModeOutlinedIcon> Dark
           </Box>
         </MenuItem>
         <MenuItem value='system'>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <SettingsBrightnessIcon fontSize='small'></SettingsBrightnessIcon>{' '}
             System
           </Box>
