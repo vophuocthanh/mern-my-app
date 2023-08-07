@@ -19,23 +19,8 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import SettingsBrightnessIcon from '@mui/icons-material/SettingsBrightness';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import Box from '@mui/material/Box';
-function ModeToggle() {
-  //  lưu localStorage vào trình duyệt (dark/light)
-  const { mode, setMode } = useColorScheme();
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  const prefersLightMode = useMediaQuery('(prefers-color-scheme: light)');
-  console.log(' prefersDarkMode: ', prefersDarkMode);
-  console.log('prefersLightMode:', prefersLightMode);
-  return (
-    <Button
-      onClick={() => {
-        setMode(mode === 'light' ? 'dark' : 'light');
-      }}
-    >
-      {mode === 'light' ? 'Turn dark' : 'Turn light'}
-    </Button>
-  );
-}
+import Container from '@mui/material/Container';
+
 export function ModeSelect() {
   const { mode, setMode } = useColorScheme();
 
@@ -44,7 +29,6 @@ export function ModeSelect() {
     console.log(selectMode);
     setMode(selectMode);
   };
-
   return (
     <FormControl sx={{ m: 1, minWidth: 120 }} size='small'>
       <InputLabel id='label-select-dark-light-mode'>Mode</InputLabel>
@@ -87,34 +71,42 @@ function HomeIcon(props) {
 }
 function App() {
   return (
-    <>
-      <ModeToggle></ModeToggle>
-      <br />
-      <ModeSelect></ModeSelect>
-      <hr />
-      <div>hello</div>
-      <Typography variant='body2' color='text.secondary'>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia fuga
-        impedit tempora atque inventore, modi odio voluptatibus. Quae
-        consequuntur odit id aperiam porro doloribus facere molestiae!
-        Doloremque aperiam consequatur excepturi!
-      </Typography>
-      <Button variant='contained'>Hello World</Button>
-      <Button variant='text'>Text</Button>
-      <Button variant='contained'>Contained</Button>
-      <Button variant='outlined'>Outlined</Button>
-      <AccessAlarmIcon></AccessAlarmIcon>
-      <ThreeDRotation></ThreeDRotation>
-      <br />
-      <HomeIcon />
-      <HomeIcon color='primary' />
-      <HomeIcon color='secondary' />
-      <HomeIcon color='success' />
-      <HomeIcon color='action' />
-      <HomeIcon color='disabled' />
-      <HomeIcon sx={{ color: pink[500] }} />
-      <br />
-    </>
+    <Container disableGutters maxWidth sx={{ height: '100vh' }}>
+      <Box
+        sx={{
+          backgroundColor: 'primary.light',
+          width: '100%',
+          height: (theme) => theme.trello.appBarHeight,
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        <ModeSelect></ModeSelect>
+      </Box>
+      <Box
+        sx={{
+          backgroundColor: 'primary.dark',
+          width: '100%',
+          height: (theme) => theme.trello.boardBarHeight,
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        Board bar
+      </Box>
+      <Box
+        sx={{
+          backgroundColor: 'primary.main',
+          width: '100%',
+          height: (theme) =>
+            `calc(100vh - ${theme.trello.appBarHeight} - ${theme.trello.boardBarHeight})`,
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        Board content
+      </Box>
+    </Container>
   );
 }
 
