@@ -1,1 +1,1 @@
-### Project MERN đầu tay của bản thân mình ̉^^.
+### Project MERN đầu tay của bản thân mình ^^.
