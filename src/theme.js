@@ -29,6 +29,7 @@ const theme = extendTheme({
             width: '8px',
             height: '8px',
           },
+          //
           '*::-webkit-scrollbar-thumb': {
             backgroundColor: '#bdc3c7',
             borderRadius: '8px',
